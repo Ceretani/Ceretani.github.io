@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Ceretani's homepage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            font-family: 'Helvetica Neue', 'Roboto', Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.55;
+            color: #2c3e50;
+            background: #ffffff;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+        a {
+            color: #1a5276;
+            text-decoration: none;
+            border-bottom: 1px dotted #aac6e0;
+        }
+        a:hover {
+            border-bottom: 1px solid #1a5276;
+        }
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eaecee;
+            padding-bottom: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .name-title {
+            font-size: 1.8rem;
+            font-weight: 350;
+            letter-spacing: -0.5px;
+            color: #1e4660;
+        }
+        .tabs {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .tab-link {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #3a6a8e;
+            cursor: pointer;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border 0.1s;
+            font-family: inherit;
+        }
+        .tab-link.active {
+            border-bottom: 2px solid #2c7fb8;
+            color: #1e4660;
+            font-weight: 400;
+        }
+        .section {
+            display: none;
+            overflow: visible !important;
+        }
+        .section.active {
+            display: block;
+        }
+
+        #publications {
+            overflow: visible !important;
+        }
+
+        .profile-row {
+            display: flex;
+            gap: 2.5rem;
+            margin: 2rem 0 2.5rem 0;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .photo {
+            width: 190px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 2px;
+            filter: grayscale(10%);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .intro {
+            flex: 1;
+        }
+        .intro p {
+            margin-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 350;
+            color: #1e4660;
+            border-bottom: 1px solid #d4e2ed;
+            padding-bottom: 0.3rem;
+            margin: 2.2rem 0 1.2rem 0;
+            letter-spacing: -0.2px;
+        }
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #2c5a7a;
+            margin: 1.8rem 0 0.8rem 0;
+        }
+
+        ul, .talks-list {
+            list-style: none;
+            margin-left: 0.2rem;
+        }
+        li, .talk-item {
+            margin-bottom: 0.55rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        li::before, .talk-item::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #2c7fb8;
+            font-weight: bold;
+        }
+
+        .pub-item {
+            margin-bottom: 1.1rem;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+        .pub-line1 {
+            font-weight: 400;
+            color: #1e4660;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+        .pub-authors {
+            color: #4d6a82;
+            font-size: 0.95rem;
+            white-space: normal;
+        }
+        .pub-line2 {
+            font-size: 0.92rem;
+            color: #456f8c;
+            margin-left: 0;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+        .dot-separator {
+            color: #2c7fb8;
+            font-weight: 300;
+            margin: 0 0.3rem;
+        }
+
+        .talk-line1 {
+            font-weight: 350;
+            color: #5f6b7a;
+            font-size: 0.95rem;
+        }
+        .talk-line2 {
+            margin-left: 0.2rem;
+            color: #1e4660;
+            font-weight: 350;
+        }
+        .stay-years {
+            font-weight: 350;
+            color: #1e4660;
+            margin-right: 0.3rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.2rem;
+        }
+
+        .teaching-block {
+            margin-bottom: 2rem;
+        }
+        .teaching-block ul {
+            margin-top: 0.2rem;
+        }
+
+        .project-item {
+            margin-bottom: 1rem;
+            padding-left: 1.2rem;
+            position: relative;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+        .project-item::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #2c7fb8;
+            font-weight: bold;
+        }
+        .project-line1 {
+            font-weight: 400;
+            color: #1e4660;
+        }
+        .project-role {
+            color: #4d6a82;
+            font-size: 0.95rem;
+        }
+        .project-line2 {
+            font-size: 0.92rem;
+            color: #456f8c;
+            margin-left: 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        footer {
+            margin-top: 3.5rem;
+            font-size: 0.85rem;
+            color: #a0b9cc;
+            text-align: right;
+            border-top: 1px solid #ecf2f7;
+            padding-top: 0.8rem;
+        }
+        .badge {
+            color: #1e4660;
+            font-weight: 350;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="name-title">Andrea Ceretani</div>
+    <div class="tabs">
+        <button class="tab-link active" onclick="showTab('home')">home</button>
+        <button class="tab-link" onclick="showTab('publications')">publications</button>
+        <button class="tab-link" onclick="showTab('teaching')">teaching</button>
+        <button class="tab-link" onclick="showTab('talks')">talks & stays</button>
+        <button class="tab-link" onclick="showTab('service')">projects, outreach & service</button>
+    </div>
+</div>
+
+<!-- =============== HOME =============== -->
+<div id="home" class="section active">
+    <div class="profile-row">
+        <img class="photo" src="https://lh3.googleusercontent.com/d/1vx5F5C2UArLSAbcZwBjrQ2Y0xEveViFQ" alt="Andrea Ceretani">
+        <div class="intro">
+            <p><span class="badge">Assistant researcher (investigadora adjunta) at CONICET</span></p>
+            <div class="contact-info">
+                <p>📫 <a href="mailto:aceretani@dm.uba.ar">aceretani@dm.uba.ar</a> &nbsp;·&nbsp; <a href="http://mate.dm.uba.ar/~aceretani/" target="_blank">mate.dm.uba.ar/~aceretani</a></p>
+                <p>📍 <a href="https://www.imas-uba-conicet.gob.ar/" target="_blank">IMAS</a>-<a href="https://www.uba.ar/" target="_blank">UBA</a>-<a href="https://www.conicet.gov.ar/" target="_blank">CONICET</a>, Argentina<br>
+                Intendente Guiraldes 2160, C1428EGA, Buenos Aires</p>
+                <p>📞 (+5411) 5285-7618/19</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>About me</h2>
+    <p>I am a mathematician working on PDEs and associated optimization and control problems. I received my Ph.D. in Mathematics (2016) and undergraduate degrees in Mathematics — <em>Licenciatura en Matemática</em> (Sciences, 2010) and <em>Profesorado en Matemática</em> (Education, 2007) — all from Universidad Nacional de Rosario, Argentina. My research combines analytical tools with applications to fluid dynamics, heat transfer and environmental modeling. I have held positions in Argentina and Germany, and conducted research visits in Italy, the USA and Ecuador. I am currently assistant researcher at CONICET (Argentina) and affiliate faculty at George Mason University (USA).</p>
+
+    <h2>Current positions</h2>
+    <ul>
+        <li>Assistant researcher (investigadora adjunta), CONICET, Argentina (2025–)</li>
+        <li>Affiliate faculty, Dept. Mathematical Sciences, George Mason University, USA (2025–)</li>
+    </ul>
+
+    <h2>Previous positions</h2>
+    <ul>
+        <li>Visiting professor, Universidad de San Andrés, Argentina (2025)</li>
+        <li>Assistant professor, Universidad de Buenos Aires, Argentina (2023–2025)</li>
+        <li>Assistant researcher (investigadora asistente), CONICET, Argentina (2020–2025)</li>
+        <li>Teaching assistant, Universidad de Buenos Aires, Argentina (2020–2023)</li>
+        <li>Assistant professor, Universidad Nacional de San Martín, Argentina (2019–2020)</li>
+        <li>Postdoctoral researcher, Humboldt-Universität zu Berlin, Germany (2017–2018)</li>
+        <li>Postdoctoral researcher, Universidad Austral, Argentina (2016–2017)</li>
+        <li>Teaching assistant, Universidad Nacional de Rosario, Argentina (2007–2017)</li>
+    </ul>
+
+    <h2>Awards, distinctions & grants</h2>
+    <ul>
+        <li>Member of the Academia Joven de Argentina (2025–)</li>
+        <li>Premio Estímulo ANCEFN (young researchers prize, 2024)</li>
+        <li>Postdoctoral grant, CONICET (2016–2017)</li>
+        <li>Doctoral grants, CONICET (2010–2016)</li>
+    </ul>
+</div>
+
+<!-- =============== PUBLICATIONS =============== -->
+<div id="publications" class="section">
+    <h2>Preprints</h2>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">A function space approach to the shape optimization of the Boussinesq system</span> <span class="dot-separator">·</span> <span class="pub-authors">with W. Hu, L. Mu, C. N. Rautenberg</span></div>
+        <div class="pub-line2"><a href="https://arxiv.org/abs/2504.15522">arXiv:2504.15522</a> (2025)</div>
+    </div>
+
+    <h2>Papers</h2>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Indoor radon in the Punilla Valley (Córdoba, Argentina): sources, controls and perspectives</span> <span class="dot-separator">·</span> <span class="pub-authors">with I. Ozán, S. Oriolo, N. Maffini, F. Esteban, I. Ferreyro, D. Temprano, C. Cantera, M. Sívori, H. Zárate, D. Rodrigues Ferreira Maltez, S. Torriglia, H. Ostera</span></div>
+        <div class="pub-line2">Environmental Earth Sciences 85:30 (2026) · <a href="https://doi.org/10.1007/s12665-025-12695-2">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">The spatially variant fractional Laplacian</span> <span class="dot-separator">·</span> <span class="pub-authors">with C. N. Rautenberg</span></div>
+        <div class="pub-line2">Fractional Calculus and Applied Analysis 26 (2023) 2837-2873 · <a href="https://doi.org/10.1007/s13540-023-00212-w">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Optimal conduit shape for Stokes flow</span> <span class="dot-separator">·</span> <span class="pub-authors">with W. Hu, C. N. Rautenberg</span></div>
+        <div class="pub-line2">Systems and Control Letters 173 (2023) 105461 · <a href="https://doi.org/10.1016/j.sysconle.2023.105461">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">On existence and uniqueness of solutions to a Boussinesq system with nonlinear and mixed boundary conditions</span> <span class="dot-separator">·</span> <span class="pub-authors">with R. Arndt, C. N. Rautenberg</span></div>
+        <div class="pub-line2">Journal of Mathematical Analysis and Applications 490 (2020) 124201 · <a href="https://doi.org/10.1016/j.jmaa.2020.124201">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">A note on models for anomalous phase-change processes</span> <span class="dot-separator">·</span> <span class="pub-authors">(solo author)</span></div>
+        <div class="pub-line2">Fractional Calculus and Applied Analysis 23:1 (2020) 167-182 · <a href="https://doi.org/10.1515/fca-2020-0006">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Auxiliary functions in the study of Stefan-like problems with variable thermal coefficients</span> <span class="dot-separator">·</span> <span class="pub-authors">with N. N. Salva, D. A. Tarzia</span></div>
+        <div class="pub-line2">Applied Mathematics Letters 104 (2020) 106204 · <a href="https://doi.org/10.1016/j.aml.2019.106204">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">The Boussinesq system with mixed non-smooth boundary conditions and do-nothing boundary flow</span> <span class="dot-separator">·</span> <span class="pub-authors">with C. N. Rautenberg</span></div>
+        <div class="pub-line2">Zeitschrift für angewandte Mathematik und Physik (ZAMP) 70:14 (2019) · <a href="https://doi.org/10.1007/s00033-018-1058-y">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Approximation of the modified error function</span> <span class="dot-separator">·</span> <span class="pub-authors">with N. N. Salva, D. A. Tarzia</span></div>
+        <div class="pub-line2">Applied Mathematics and Computation 337 (2018) 607-617 · <a href="https://doi.org/10.1016/j.amc.2018.05.054">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Mathematical model for acid water neutralization with anomalous and fast diffusion</span> <span class="dot-separator">·</span> <span class="pub-authors">with J. Bollati, L. Fusi, F. Rosso</span></div>
+        <div class="pub-line2">Nonlinear Analysis: Real World Applications 41 (2018) 509-528 · <a href="https://doi.org/10.1016/j.nonrwa.2017.11.006">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">An exact solution to a Stefan problem with variable thermal conductivity and a Robin boundary condition</span> <span class="dot-separator">·</span> <span class="pub-authors">with N. N. Salva, D. A. Tarzia</span></div>
+        <div class="pub-line2">Nonlinear Analysis: Real World Applications 40 (2018) 243-259 · <a href="https://doi.org/10.1016/j.nonrwa.2017.09.002">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Similarity solution for a two-phase one-dimensional Stefan problem with a convective boundary condition and a mushy zone model</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">Computational and Applied Mathematics 37 (2018) 2201-2217 · <a href="https://doi.org/10.1007/s40314-017-0442-0">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Existence and uniqueness of the modified error function</span> <span class="dot-separator">·</span> <span class="pub-authors">with N. N. Salva, D. A. Tarzia</span></div>
+        <div class="pub-line2">Applied Mathematics Letters 70 (2017) 14-17 · <a href="https://doi.org/10.1016/j.aml.2017.02.017">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Determination of two unknown thermal coefficients through an inverse one-phase fractional Stefan problem</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">Fractional Calculus and Applied Analysis 20-2 (2017) 399-421 · <a href="https://doi.org/10.1515/fca-2017-0021">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Modeling peristaltic flow in vessels equipped with valves: implications for vasomotion in bat wing venules</span> <span class="dot-separator">·</span> <span class="pub-authors">with A. Farina, L. Fusi, A. Fasano, F. Rosso</span></div>
+        <div class="pub-line2">International Journal of Engineering Science 107 (2016) 1-12 · <a href="https://doi.org/10.1016/j.ijengsci.2016.07.002">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Simultaneous determination of two unknown thermal coefficients through a mushy zone model with an overspecified convective boundary condition</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">JP Journal of Heat and Mass Transfer 13-2 (2016) 277-301 · <a href="http://dx.doi.org/10.17654/HM013020277">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Explicit solutions for a non-classical heat conduction problem for a semi-infinite strip with a non-uniform heat source</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia, L. T. Villa</span></div>
+        <div class="pub-line2">Boundary Value Problems 156 (2015) 1-26 · <a href="https://doi.org/10.1186/s13661-015-0416-3">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Determination of one unknown thermal coefficient through a mushy zone model with a convective overspecified boundary condition</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">Mathematical Problems in Engineering 2015 (2015) 1-8 · <a href="http://dx.doi.org/10.1155/2015/637852">doi</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Similarity solutions for thawing processes with a convective boundary condition</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">Rendiconti dell'Istituto di Matematica dell'Università di Trieste 46 (2014) 137-155 · <a href="https://www.openstarts.units.it/handle/10077/10635">hdl</a></div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Resolución numérica de las ecuaciones de Navier-Stokes con OpenFOAM: el problema del flujo en un canal con escalón</span> <span class="dot-separator">·</span> <span class="pub-authors">with M. C. Sanziel, M. Portapila</span></div>
+        <div class="pub-line2">Cuadernos del Curiham 19 (2013) 1-14 · <a href="https://cuadernosdelcuriham.unr.edu.ar/index.php/CURIHAM/article/view/39">html</a></div>
+    </div>
+
+    <h2>Book chapters</h2>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Uniform temperature distribution induced by an optimal domain shape</span> <span class="dot-separator">·</span> <span class="pub-authors">with C. He, W. Hu, L. Mu, C. N. Rautenberg</span></div>
+        <div class="pub-line2">in: Women in Mathematics Latin America, Springer–Birkhäuser (to appear 2026)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Exact solutions to the fractional Boussinesq equation</span> <span class="dot-separator">·</span> <span class="pub-authors">with F. Falcini, R. Garra</span></div>
+        <div class="pub-line2">in: Fractional Differential Equations, Springer INdAM Series (2023) · <a href="https://doi.org/10.1007/978-981-19-7716-9_2">doi</a></div>
+    </div>
+
+    <h2>Proceedings</h2>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Indoor radon concentration: Mathematical model and numerical simulation</span> <span class="dot-separator">·</span> <span class="pub-authors">with G. Armentano, M. Mendiluce, S. Oriolo</span></div>
+        <div class="pub-line2">X MACI, Córdoba, Argentina (2025)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">The stationary Boussinesq equations with do-nothing boundary conditions</span> <span class="dot-separator">·</span> <span class="pub-authors">with R. Arndt, C. N. Rautenberg</span></div>
+        <div class="pub-line2">VII MACI, Río Cuarto, Argentina (2019)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Una representación en serie de potencias para la función de error modificada</span> <span class="dot-separator">·</span> <span class="pub-authors">with N. N. Salva, D. A. Tarzia</span></div>
+        <div class="pub-line2">VI MACI, Comodoro Rivadavia, Argentina (2017)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Determinación simultánea de dos coeficientes térmicos mediante problemas inversos de Stefan fraccionarios</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">VI MACI, Comodoro Rivadavia, Argentina (2017)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Solución de similaridad para un problema de Stefan a dos fases con zona pastosa y condición de frontera convectiva</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">VI MACI, Comodoro Rivadavia, Argentina (2017)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Determinación de un coeficiente térmico en un proceso de solidificación con zona pastosa generado a partir de una sobrecondición convectiva en la frontera fija</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">V MACI, Tandil, Argentina (2015)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Determination of two unknown thermal coefficients through a mushy zone with a convective overspecified boundary condition</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">I PANAMC - XI MECOM, Buenos Aires, Argentina (2015)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Solución de similaridad en procesos de descongelamiento en un medio poroso con condición convectiva en el borde fijo</span> <span class="dot-separator">·</span> <span class="pub-authors">with D. A. Tarzia</span></div>
+        <div class="pub-line2">IV MACI, Buenos Aires, Argentina (2013)</div>
+    </div>
+    <div class="pub-item">
+        <div class="pub-line1"><span class="pub-title">Decaimiento de la turbulencia en resaltos hidráulicos</span> <span class="dot-separator">·</span> <span class="pub-authors">with M. Romagnoli, M. Portapila</span></div>
+        <div class="pub-line2">IX MECOM, Buenos Aires, Argentina (2010)</div>
+    </div>
+</div>
+
+<!-- =============== TEACHING =============== -->
+<div id="teaching" class="section">
+    <h2>Teaching</h2>
+
+    <div class="teaching-block">
+        <h3>Universidad de Buenos Aires</h3>
+        <ul>
+            <li>2025 · Geometría</li>
+            <li>2024 · Análisis Matemático II</li>
+            <li>2023 · Análisis Matemático II</li>
+            <li>2022 · Ecuaciones Diferenciales A/B</li>
+            <li>2022 · Matemática I</li>
+            <li>2021 · Ecuaciones Diferenciales A/B</li>
+            <li>2020 · Ecuaciones Diferenciales A/B</li>
+        </ul>
+    </div>
+
+    <div class="teaching-block">
+        <h3>Universidad de San Andrés</h3>
+        <ul><li>2025 · Introducción al Razonamiento Matemático</li></ul>
+    </div>
+
+    <div class="teaching-block">
+        <h3>Universidad Nacional de San Martín</h3>
+        <ul>
+            <li>2020 · Introducción al Análisis Matemático</li>
+            <li>2019 · Introducción al Análisis Matemático</li>
+        </ul>
+    </div>
+
+    <div class="teaching-block">
+        <h3>Universidad Nacional de Rosario</h3>
+        <ul>
+            <li>2017 · Análisis Numérico II, Ecuaciones Diferenciales</li>
+            <li>2016 · Análisis Matemático I</li>
+            <li>2015 · Análisis Numérico II, Computación</li>
+            <li>2014 · Análisis Numérico II, Álgebra y Geometría I</li>
+            <li>2013 · Análisis Numérico II, Probabilidad y Estadística, Análisis Matemático, Álgebra y Geometría I, Computación</li>
+            <li>2012 · Análisis Numérico II, Computación</li>
+            <li>2011 · Álgebra y Geometría II, Estructuras Algebraicas</li>
+            <li>2010 · Álgebra y Geometría, Análisis Matemático I</li>
+            <li>2009 · Currículum y Didáctica</li>
+            <li>2008 · Currículum y Didáctica, Análisis Matemático II</li>
+            <li>2007 · Currículum y Didáctica</li>
+        </ul>
+    </div>
+</div>
+
+<!-- =============== TALKS & STAYS =============== -->
+<div id="talks" class="section">
+    <h2>Invited talks</h2>
+    <ul class="talks-list">
+        <li class="talk-item">
+            <div class="talk-line1">2024 · Centro de Modelización Matemática Seminar, Ecuador</div>
+            <div class="talk-line2">Uniform temperature distribution induced by shape optimization</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2024 · Workshop Ibero Argentino en EDP, Argentina</div>
+            <div class="talk-line2">Uniform temperature distribution induced by shape optimization</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2023 · Workshop on Local and Nonlocal Coupled Equations, Uruguay</div>
+            <div class="talk-line2">Variational definition for the fractional Laplacian with variable order</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2023 · LatAm. Congress on Industrial and Appl. Mathematics (LACIAM), Brazil</div>
+            <div class="talk-line2">Shape optimization for flows under mixed boundary conditions</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2022 · Inst. de Matemática Pura y Aplicada del Litorial (IMAL) Seminar, Argentina</div>
+            <div class="talk-line2">Variational definition for the fractional Laplacian with variable order</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2021 · Centro de Modelización Matemática Seminar, Ecuador</div>
+            <div class="talk-line2">Boussinesq equations with mixed and nonlinear boundary conditions</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2019 · Seminar on differential equations and numerical analysis, FCEN, UBA, Argentina</div>
+            <div class="talk-line2">Boussinesq equations on truncated domains</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2019 · Dept. of Mathematics Seminar, ECyT, UNSAM, Argentina</div>
+            <div class="talk-line2">Boussinesq equations on truncated domains</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2019 · Dept. of Mathematics Seminar, FCEIA, UNR, Argentina</div>
+            <div class="talk-line2">Boussinesq equations on truncated domains</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2019 · Dept. of Mathematical Sciences Seminar, GMU, USA</div>
+            <div class="talk-line2">Heat-conducting fluids in domains with open boundaries</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2017 · Weierstrass Inst. for Applied Analysis and Stochastics (WIAS) Seminar, Germany</div>
+            <div class="talk-line2">Anomalous diffusion with free boundaries</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2016 · Dipartimento di Scienze Statistiche, Sapienza-Università di Roma Seminar, Italy</div>
+            <div class="talk-line2">Some results on fractional Stefan problems</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2016 · Inst. de Matemática Pura y Aplicada del Litorial (IMAL) Seminar, Argentina</div>
+            <div class="talk-line2">Stefan problems: introduction, examples, and recent generalizations</div>
+        </li>
+        <li class="talk-item">
+            <div class="talk-line1">2011 · CIFASIS Seminar, Argentina</div>
+            <div class="talk-line2">Turbulence models based on large-eddy simulation</div>
+        </li>
+    </ul>
+
+    <h2>Research stays</h2>
+    <ul>
+        <li><span class="stay-years">2024</span> · Centro de Modelización Matemática (Ecuador) · American Institute of Mathematics (USA)</li>
+        <li><span class="stay-years">2022 | 2019</span> · George Mason University (USA) · American Institute of Mathematics (USA)</li>
+        <li><span class="stay-years">2019 | 2017 | 2016 | 2015</span> · Università degli Studi Firenze (Italy)</li>
+        <li><span class="stay-years">2018</span> · Weierstrass Institute (WIAS), Berlin (Germany)</li>
+        <li><span class="stay-years">2017 | 2015</span> · Centro Atómico Bariloche (Argentina)</li>
+    </ul>
+</div>
+
+<!-- =============== PROJECTS, OUTREACH & SERVICE =============== -->
+<div id="service" class="section">
+   <h2>Projects, outreach & service</h2>
+
+    <h3>Applied project: RAD.AR (Radón Argentina)</h3>
+    <div class="project-item">
+        <div class="project-line2">An interdisciplinary initiative bringing together researchers from applied mathematics, geology and health sciences to address indoor radon exposure — the second leading cause of lung cancer worldwide. The team conducted the first systematic indoor radon survey in Argentina (Punilla Valley, Córdoba), identifying geological controls and seasonal variations, and developed mathematical models to evaluate ventilation strategies for reducing radon concentration in homes. Preliminary results have been published in Environmental Earth Sciences (2025) and presented at MACI 2025, as well as in scientific meetings (PROSA 2023, SSAGI 2024). Ongoing field campaigns and further development of mathematical models for mitigation strategies continue to advance the project. More information: @radonargentina on Instagram.</div>
+    </div>
+
+    <h3>Selected research projects (PI / director / co-director)</h3>
+    
+    <div class="project-item">
+        <div class="project-line1">Mixed and nonlocal equations: analytic, numerical and probabilistic aspects <span class="dot-separator">·</span> <span class="project-role">director Argentina</span></div>
+        <div class="project-line2">Regional program Math-AmSud (2024–2025)</div>
+    </div>
+    
+    <div class="project-item">
+        <div class="project-line1">Optimal mixing and control of heat conductive flows <span class="dot-separator">·</span> <span class="project-role">principal investigator</span></div>
+        <div class="project-line2">SQuaREs program, American Institute of Mathematics, USA (2022–2024)</div>
+    </div>
+    
+    <div class="project-item">
+        <div class="project-line1">High precision and stable numerical resolution of partial differential equations using meshless methods applied to fractional calculus <span class="dot-separator">·</span> <span class="project-role">co-director</span></div>
+        <div class="project-line2">PPCT-UNR 0600057UR, Universidad Nacional de Rosario, Argentina (2023–2026)</div>
+    </div>
+    
+    <div class="project-item">
+        <div class="project-line1">RAD.AR: Radon gas and its social and environmental impact <span class="dot-separator">·</span> <span class="project-role">principal investigator</span></div>
+        <div class="project-line2">+4I program, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires (2023–2024)</div>
+    </div>
+
+    <h3>Mentoring & thesis committees</h3>
+    <ul>
+        <li>Co-advisor: Matteo Cardini (master thesis, Univ. Firenze, 2017)</li>
+        <li>PhD thesis examiner (miembro de jurado de tesis doctoral): UNRosario (2025), UNSan Luis (2025), UAustral (2023)</li>
+        <li>Undergraduate thesis examiner (miembro de jurado de tesis de licenciatura): UBA (2026, 2024)</li>
+    </ul>
+
+    <h3>Outreach & science communication</h3>
+    <ul>
+        <li>2025 · Panelist, Gender Discussion Forum – 13th Winter School Santaló (UBA)</li>
+        <li>2024 · Panelist, video series "Ciencia en marcha" – Academia Nacional de Ciencias Exactas, Físicas y Naturales (ANCEFN)</li>
+    </ul>
+
+    <h3>Conference & seminar organization</h3>
+    <ul>
+        <li>Member of organizing committee: MiLNE Congress 2025, Colloquium DM/UBA (2024–25), IMAS/IC workshop (2023), Seminar of differential equations (UBA, 2024–25)</li>
+        <li>Session chair: UMA 2024, virtUMA 2021 · Mini‑symposium organizer IFIP 2021</li>
+    </ul>
+
+    <h3>Committees & representation</h3>
+    <ul>
+        <li>Teaching assistant search committees: UBA (2024, 2021), UNR (2015)</li>
+        <li>Graduate Council Representative (UBA, 2022–24) · Student Council Representative (UNR, 2009–10)</li>
+        <li>Member of ASAMACI board (secretary, 2015–17)</li>
+    </ul>
+</div>
+
+<footer>
+    <address>
+        last updated <span id="currentDate">April 2, 2026</span>
+    </address>
+</footer>
+
+<script>
+function showTab(tabId) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('.tab-link').forEach(tab => tab.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    const buttons = document.querySelectorAll('.tab-link');
+    buttons.forEach(btn => {
+        if (btn.textContent.trim().toLowerCase().includes(tabId)) btn.classList.add('active');
+    });
+}
+window.showTab = showTab;
+</script>
+
+</body>
+</html>
